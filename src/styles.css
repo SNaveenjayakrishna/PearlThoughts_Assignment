@@ -1,0 +1,84 @@
+.formdata {
+  display: flex;
+  justify-content: center;
+}
+.formdata form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.group {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.group input,
+.group label,
+.dropdown {
+  margin: 4px;
+}
+#input_field {
+  width: 40%;
+}
+.repeat_every {
+  display: flex;
+  flex-direction: column;
+}
+.dropdown {
+  padding: 5px;
+}
+.dropdown ul {
+  width: 40%;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+/*.formdata {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;  spacing between groups 
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  background: #f9f9f9;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.group input[type="date"] {
+  width: 60%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.radiobtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radiobtn input[type="radio"] {
+  transform: scale(1.2);
+}
+*/
