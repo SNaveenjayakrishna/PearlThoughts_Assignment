@@ -183,18 +183,18 @@ export default function GenerateCalendar({ datesArray = [], initialDate }) {
             <tr key={wi}>
               {week.map((cell, ci) => {
                 const isHighlighted =
-                  cell.isoDate && highlightSet.has(cell.isoDate);
+                  cell.isoDate && highlightSet.has(cell.isoDate);//checks for the valid date and the date need to be highlighted or not
                 const isToday =
                   isTodayMonth &&
                   cell.dayNumber === today.getDate() &&
-                  cell.isoDate != null;
-
-                let style = { ...tdStyleBase };
-                if (isToday) style = { ...style, ...todayStyle };
+                  cell.isoDate != null;//checks for the current month ,isTodayMonth (i.e whether it is a current month or not checked in the beggining) and current day and the cell is a valid date
+//... is a spreadoperator that is used to create a copy rather than pointing to the same element.
+                let style = { ...tdStyleBase };//tdStyleBase is an object that contains style for the table cell
+                if (isToday) style = { ...style, ...todayStyle };//If the current cell is today, then merge the todayStyle object into the style object
 
                 return (
-                  <td key={ci} style={style}>
-                    {cell.dayNumber != null ? (
+                  <td key={ci} style={style}> //
+                    {cell.dayNumber != null ? ( //checks the cell has a valid day
                       isHighlighted ? (
                         <span style={highlightStyle}>{cell.dayNumber}</span>
                       ) : (
