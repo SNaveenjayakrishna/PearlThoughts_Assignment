@@ -2,19 +2,19 @@ import React, { useMemo, useState } from "react";
 
 export default function GenerateCalendar({ datesArray = [], initialDate }) {
   const highlightSet = useMemo(() => new Set(datesArray), [datesArray]);
-
+//stores the initial date
   const seedDate = useMemo(() => {
     if (initialDate) return new Date(initialDate);
     if (datesArray.length > 0) return new Date(datesArray[0]);
     return new Date();
   }, [initialDate, datesArray]);
 
-  const [displayYear, setDisplayYear] = useState(seedDate.getFullYear());
-  const [displayMonth, setDisplayMonth] = useState(seedDate.getMonth()); // 0-11
+  const [displayYear, setDisplayYear] = useState(seedDate.getFullYear());// Gets the initial year
+  const [displayMonth, setDisplayMonth] = useState(seedDate.getMonth()); // Gets the initial month
 
   const today = new Date();
   const isTodayMonth =
-    today.getFullYear() === displayYear && today.getMonth() === displayMonth;
+    today.getFullYear() === displayYear && today.getMonth() === displayMonth;//STores whether the start date is todays date
 
   const monthNames = [
     "January",
@@ -32,53 +32,54 @@ export default function GenerateCalendar({ datesArray = [], initialDate }) {
   ];
 
   const goPrev = () => {
-    setDisplayMonth((m) => {
+    setDisplayMonth((m) => {//moves to previous month
       if (m === 0) {
-        setDisplayYear((y) => y - 1);
+        setDisplayYear((y) => y - 1);// if the current month is January then decreases the year by 1 and returns the month as December(index value 11)
         return 11;
       }
-      return m - 1;
+      return m - 1;//if not jan then decrease the monthy alnoe by 1
     });
   };
 
   const goNext = () => {
-    setDisplayMonth((m) => {
+    setDisplayMonth((m) => { //moves to next month
       if (m === 11) {
-        setDisplayYear((y) => y + 1);
+        setDisplayYear((y) => y + 1); // at december increases the year by 1 and return january's index value 0
         return 0;
       }
-      return m + 1;
+      return m + 1; // if not december just increment the month index by 1
     });
   };
 
   // Build calendar grid data: array of weeks; each week array has 7 cells {dayNumber|null, isoDate|null}
   const weeks = useMemo(() => {
-    const firstDayWeekday = new Date(displayYear, displayMonth, 1).getDay(); // 0=Sun
-    const daysInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+    const firstDayWeekday = new Date(displayYear, displayMonth, 1).getDay(); //gets the first day of the initial month
+    const daysInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();//gets the no. of days in the initial month
 
-    const rows = [];
-    let day = 1;
+    const rows = [];//it stores the weeks
+    let day = 1;//it tracks the days
+    
     for (let wk = 0; wk < 6; wk++) {
-      const weekCells = [];
+      const weekCells = [];//stores 7 days
       for (let wd = 0; wd < 7; wd++) {
-        if (wk === 0 && wd < firstDayWeekday) {
-          weekCells.push({ dayNumber: null, isoDate: null });
-        } else if (day > daysInMonth) {
-          weekCells.push({ dayNumber: null, isoDate: null });
+        if (wk === 0 && wd < firstDayWeekday) { // checks for the day is starting day in the first week 
+          weekCells.push({ dayNumber: null, isoDate: null });//adds empty cell
+        } else if (day > daysInMonth) { //checks whether the number of days is greater than the days in the month
+          weekCells.push({ dayNumber: null, isoDate: null });//adds empty cell
         } else {
-          const cellDate = new Date(displayYear, displayMonth, day);
-          const iso = cellDate.toISOString().split("T")[0];
-          weekCells.push({ dayNumber: day, isoDate: iso });
-          day++;
+          const cellDate = new Date(displayYear, displayMonth, day);//Creates the specific day for the current date (day) to be added
+          const iso = cellDate.toISOString().split("T")[0];//converts the date to the format "YYYY-MM-DD"
+          weekCells.push({ dayNumber: day, isoDate: iso }); //adds the day
+          day++;//increments the day after adding to the calendar
         }
       }
-      rows.push(weekCells);
-      if (day > daysInMonth) break;
+      rows.push(weekCells); //adds the week to the row 
+      if (day > daysInMonth) break; // if the day goes beyond the number of days in the month just break the loop
     }
     return rows;
-  }, [displayYear, displayMonth]);
+  }, [displayYear, displayMonth]);// the above calculation of weeks only runs when Display month and year changes
 
-  // Styles (inline for demo; move to CSS if you like)
+  // Styles 
   const tableStyle = {
     width: "90%",
     maxWidth: "700px",
