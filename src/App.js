@@ -3,6 +3,7 @@ import MyForm from "./Component/MyForm";
 import RecurringDateGenerator from "./Component/RecurringDateGenerator";
 
 export default function App() {
+  // Holds the most recently submitted data from <MyForm>.
   const [recurrenceData, setRecurrenceData] = useState(null);
 
   const handleFormSubmit = (data) => {
