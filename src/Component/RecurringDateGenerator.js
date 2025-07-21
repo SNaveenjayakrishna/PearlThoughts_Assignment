@@ -20,7 +20,8 @@ if (startDate && endDate) {
       if (repeatType === "Monthly") current = addMonths(current, 1);
       if (repeatType === "Yearly") current = addYears(current, 1);
     }
-  } else if (interval && unit) {
+  }// If user selected repeat option(daily or weekly or monthly or Yearly) this part executes
+  else if (interval && unit) {
     interval = Number(interval);
     const lowerUnit = unit.toLowerCase();
     while (current <= end) {
@@ -30,7 +31,7 @@ if (startDate && endDate) {
       if (lowerUnit === "months") current = addMonths(current, interval);
       if (lowerUnit === "years") current = addYears(current, interval);
     }
-  }
+  }// if user selected repeat every custom option this part executes
 }
 
   return (
@@ -39,10 +40,3 @@ if (startDate && endDate) {
 
   );
 }
-/*    while (isBefore(current, addDays(end, 1))) {
-        dates.push(format(current, "yyyy-MM-dd"));
-        if (unit === "days") current = addDays(current, interval);
-        if (unit === "weeks") current = addWeeks(current, interval);
-        if (unit === "months") current = addMonths(current, interval);
-        if (unit === "years") current = addYears(current, interval);
-      }*/
