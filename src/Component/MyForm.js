@@ -5,28 +5,25 @@ import RepeatOptions from "./RepeatOptions";
 import RepeatEvery from "./RepeatEvery";
 
 export default function MyForm({ onFormSubmit }) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [repeatType, setRepeatType] = useState("");
-  const [unit, setUnit] = useState("");
-  const [repeatInterval, setRepeatInterval] = useState("");
+  const [startDate, setStartDate] = useState("");//startDate is used to store the selected start date
+  const [endDate, setEndDate] = useState("");//stores enddate
+  const [repeatType, setRepeatType] = useState("");//STores the repeatType
+  const [unit, setUnit] = useState("");//stores what to repeat like days or weeks or months or year
+  const [repeatInterval, setRepeatInterval] = useState("");//stores number to repeat
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); //stops browser reloading
      const formData = {
       startDate,
       endDate,
       repeatType, 
       unit,
       repeatInterval,
-    }; 
+    }; //User selected details are stored in one object
     console.log("Form Values:", formData);
 if (onFormSubmit) {
-      onFormSubmit(formData); // Call only if parent provides this function
+      onFormSubmit(formData); //Sends data to app.js
     } 
-
-
-  
   };
 
   return (
